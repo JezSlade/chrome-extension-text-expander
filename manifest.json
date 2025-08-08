@@ -1,0 +1,65 @@
+{
+  "manifest_version": 3,
+  "name": "PromptExpander",
+  "version": "0.1.0",
+  "description": "Chrome extension for AI prompt engineering with advanced text expansion",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "clipboardRead",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "omnibox": {
+    "keyword": "px"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "PromptExpander",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "commands": {
+    "quick-menu": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space"
+      },
+      "description": "Open snippet search menu"
+    },
+    "expansion-undo": {
+      "suggested_key": {
+        "default": "Ctrl+Z"
+      },
+      "description": "Undo last expansion"
+    }
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js", "form-modal.html", "form-modal.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
